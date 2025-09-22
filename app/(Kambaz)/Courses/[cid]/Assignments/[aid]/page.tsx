@@ -76,7 +76,7 @@ export default function AssignmentEditor() {
                 <label>Assign:</label>
             </td>
             <td align="right" valign="top">
-               <input suppressHydrationWarning={true} type="text" title="John" id="wd-assign-to"/>
+               <input defaultValue="Everyone" suppressHydrationWarning={true} type="text" title="John" id="wd-assign-to"/>
             </td>
         </tr>
         <tr>
