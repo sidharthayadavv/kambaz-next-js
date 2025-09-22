@@ -2,6 +2,13 @@ export default function Modules() {
   return (
     <div>
       {/* Implement Collapse All button, View Progress button, etc. */}
+      <button suppressHydrationWarning={true} type="button" id="wd-collapseall-button">Collapse All</button>
+      <button suppressHydrationWarning={true} type="button" id="wd-progress-button">View Progress</button>
+      <select suppressHydrationWarning={true} id="wd-select-publish" defaultValue="PUBLISH">
+        <option value="PUBLISH">Publish All</option>
+        <option value="PUBLISH MOD1">Publish MODULE 1</option>
+      </select>
+      <button suppressHydrationWarning={true} type="button" id="wd-cancel-button">+ Module</button>
       <ul id="wd-modules">
         <li className="wd-module">
           <div className="wd-title">Week 1</div>
