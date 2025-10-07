@@ -1,0 +1,14 @@
+#wd-signin-screen {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#wd-signup-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#wd-signup-link:hover {
+  text-decoration: underline;
+}
