@@ -1,13 +1,23 @@
+"use client"
 import { AiOutlineDashboard, AiTwotoneExperiment } from "react-icons/ai";
 import {
   FaBookOpenReader,
   FaCalendarCheck,
   FaRegCircleUser,
 } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { FiInbox } from "react-icons/fi";
 export default function KambazNavigation() {
+  const pathname = usePathname();
+  const links = [
+    { id: 1, label: "Dashboard", path: "/Dashboard", icon: AiOutlineDashboard },
+    { id: 2, label: "Courses",   path: "/Dashboard", icon: FaBookOpenReader },
+    { id: 3, label: "Calendar",  path: "/Calendar",  icon: FaCalendarCheck },
+    { id: 4, label: "Inbox",     path: "/Inbox",     icon: FiInbox },
+    { id: 5, label: "Labs",      path: "/Labs",      icon: AiTwotoneExperiment },
+  ];
   return (
     <div id="wd-kambaz-navigation">
       <ListGroup
@@ -28,48 +38,23 @@ export default function KambazNavigation() {
             alt="Northeastern University"
           />
         </ListGroupItem>
-        <ListGroupItem className="border-0 bg-black text-center">
-          <Link href="/Account" id="wd-account-link" className="text-white text-decoration-none">
-            <FaRegCircleUser className="fs-1 text-white" />
-            <br />
-            Account
-          </Link>
+        <ListGroupItem as={Link} href="/Account"
+        className={`text-center border-0 bg-black
+            ${pathname.includes("Account") ? "bg-white text-danger" : "bg-black text-white"}`}>
+        <FaRegCircleUser
+          className={`fs-1 ${pathname.includes("Account") ? "text-danger" : "text-white"}`} />
+        <br />
+        Account
+      </ListGroupItem>
+      {links.map((link) => (
+        <ListGroupItem key={link.id} as={Link} href={link.path}
+          className={`bg-black text-center border-0
+              ${pathname.includes(link.label) ? "text-danger bg-white" : "text-white bg-black"}`}>
+          {link.icon({ className: "fs-1 text-danger"})}
+          <br />
+          {link.label}
         </ListGroupItem>
-        <ListGroupItem className="border-0 bg-white text-center">
-          <Link href="/Dashboard" id="wd-dashboard-link" className="text-black text-decoration-none">
-            <AiOutlineDashboard className="fs-1 text-danger" />
-            <br />
-            Dashboard
-          </Link>
-        </ListGroupItem>
-        <ListGroupItem className="border-0 bg-black text-center">
-          <Link href="/Dashboard" id="wd-course-link" className="text-white text-decoration-none">
-            <FaBookOpenReader className="fs-1 text-danger" />
-            <br />
-            Courses
-          </Link>
-        </ListGroupItem>
-        <ListGroupItem className="border-0 bg-black text-center">
-          <Link href="/Calendar" id="wd-calendar-link" className="text-white text-decoration-none">
-            <FaCalendarCheck className="fs-1 text-danger" />
-            <br />
-            Calendar
-          </Link>
-        </ListGroupItem>
-        <ListGroupItem className="border-0 bg-black text-center">
-          <Link href="/Inbox" id="wd-inbox-link" className="text-white text-decoration-none">
-            <FiInbox className="fs-1 text-danger" />
-            <br />
-            Inbox
-          </Link>
-        </ListGroupItem>
-        <ListGroupItem className="border-0 bg-black text-center">
-          <Link href="/Labs" id="wd-labs-link" className="text-white text-decoration-none">
-            <AiTwotoneExperiment className="fs-1 text-danger" />
-            <br />
-            Labs
-          </Link>
-        </ListGroupItem>
+      ))}
       </ListGroup>
     </div>
   );

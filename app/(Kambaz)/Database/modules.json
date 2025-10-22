@@ -1,0 +1,642 @@
+[
+  {
+    "id": "M101",
+    "name": "Introduction to Rocket Propulsion",
+    "description": "Basic principles of rocket propulsion and rocket engines.",
+    "course": "RS101",
+    "lessons": [
+      {
+        "id": "L101",
+        "name": "History of Rocketry",
+        "description": "A brief history of rocketry and space exploration."
+      },
+      {
+        "id": "L102",
+        "name": "Rocket Propulsion Fundamentals",
+        "description": "Basic principles of rocket propulsion."
+      },
+      {
+        "id": "L103",
+        "name": "Rocket Engine Types",
+        "description": "Overview of different types of rocket engines."
+      }
+    ]
+  },
+  {
+    "id": "M102",
+    "name": "Fuel and Combustion",
+    "description": "Understanding rocket fuel, combustion processes, and efficiency.",
+    "course": "RS101",
+    "lessons": [
+      {
+        "id": "L104",
+        "name": "Rocket Fuel Types",
+        "description": "Overview of different types of rocket fuels."
+      },
+      {
+        "id": "L105",
+        "name": "Combustion Processes",
+        "description": "Understanding combustion processes and efficiency."
+      },
+      {
+        "id": "L106",
+        "name": "Combustion Instability",
+        "description": "Understanding combustion instability and mitigation."
+      }
+    ]
+  },
+  {
+    "id": "M103",
+    "name": "Nozzle Design",
+    "description": "Principles of rocket nozzle design and performance optimization.",
+    "course": "RS101",
+    "lessons": [
+      {
+        "id": "L107",
+        "name": "Nozzle Theory",
+        "description": "Fundamental concepts in nozzle design."
+      },
+      {
+        "id": "L108",
+        "name": "Nozzle Efficiency",
+        "description": "Factors affecting nozzle efficiency."
+      },
+      {
+        "id": "L109",
+        "name": "Thrust and Expansion Ratios",
+        "description": "Thrust and calculation of expansion ratios."
+      }
+    ]
+  },
+  {
+    "id": "M104",
+    "name": "Thrust Vector Control",
+    "description": "Methods and technologies for controlling rocket thrust direction.",
+    "course": "RS101",
+    "lessons": [
+      {
+        "id": "L110",
+        "name": "TVC Mechanisms",
+        "description": "Mechanical and hydraulic TVC systems."
+      },
+      {
+        "id": "L111",
+        "name": "Electronic Control",
+        "description": "Electronic and software control of TVC."
+      },
+      {
+        "id": "L112",
+        "name": "Case Studies in TVC",
+        "description": "Case studies of successful TVC deployments."
+      }
+    ]
+  },
+  {
+    "id": "M201",
+    "name": "Fundamentals of Aerodynamics",
+    "description": "Basic aerodynamic concepts and fluid dynamics principles.",
+    "course": "RS102",
+    "lessons": [
+      {
+        "id": "L201",
+        "name": "Fluid Properties",
+        "description": "Physical properties of fluids."
+      },
+      {
+        "id": "L202",
+        "name": "Bernoulli Principle",
+        "description": "Bernoulli's law and applications."
+      },
+      {
+        "id": "L203",
+        "name": "Boundary Layers",
+        "description": "Boundary layer formation and flow."
+      }
+    ]
+  },
+  {
+    "id": "M202",
+    "name": "Subsonic and Supersonic Flow",
+    "description": "Understanding subsonic and supersonic aerodynamic behaviors.",
+    "course": "RS102",
+    "lessons": [
+      {
+        "id": "L204",
+        "name": "Mach Number Basics",
+        "description": "Definition and significance of Mach numbers."
+      },
+      {
+        "id": "L205",
+        "name": "Shock Waves",
+        "description": "Shock wave formation and properties."
+      },
+      {
+        "id": "L206",
+        "name": "High-Speed Flow Analysis",
+        "description": "Analysis of objects in supersonic flow."
+      }
+    ]
+  },
+  {
+    "id": "M203",
+    "name": "Aerodynamic Heating",
+    "description": "Study of aerodynamic heating and thermal protection systems.",
+    "course": "RS102",
+    "lessons": [
+      {
+        "id": "L207",
+        "name": "Heat Transfer Mechanisms",
+        "description": "Heat transfer principles in aerodynamics."
+      },
+      {
+        "id": "L208",
+        "name": "Thermal Protection Materials",
+        "description": "Types of materials for thermal protection."
+      },
+      {
+        "id": "L209",
+        "name": "Thermal Analysis",
+        "description": "Techniques for thermal analysis."
+      }
+    ]
+  },
+  {
+    "id": "M204",
+    "name": "Airfoil Design",
+    "description": "Principles of designing and optimizing airfoil shapes.",
+    "course": "RS102",
+    "lessons": [
+      {
+        "id": "L210",
+        "name": "Airfoil Shapes",
+        "description": "Common airfoil shapes and their functions."
+      },
+      {
+        "id": "L211",
+        "name": "Lift and Drag",
+        "description": "Principles of lift and drag generation."
+      },
+      {
+        "id": "L212",
+        "name": "Airfoil Optimization",
+        "description": "Methods for optimizing airfoil design."
+      }
+    ]
+  },
+  {
+    "id": "M301",
+    "name": "Spacecraft Structural Design",
+    "description": "Fundamentals of designing spacecraft structures and materials selection.",
+    "course": "RS103",
+    "lessons": [
+      {
+        "id": "L301",
+        "name": "Materials in Spacecraft",
+        "description": "Selection of materials for spacecraft."
+      },
+      {
+        "id": "L302",
+        "name": "Structural Analysis",
+        "description": "Techniques of structural analysis for space hardware."
+      },
+      {
+        "id": "L303",
+        "name": "Load Management",
+        "description": "Managing loads and forces during launch."
+      }
+    ]
+  },
+  {
+    "id": "M302",
+    "name": "Orbital Mechanics",
+    "description": "Understanding orbital dynamics and mission planning.",
+    "course": "RS103",
+    "lessons": [
+      {
+        "id": "L304",
+        "name": "Kepler's Laws",
+        "description": "Orbital motion and Kepler's laws."
+      },
+      {
+        "id": "L305",
+        "name": "Orbit Transfers",
+        "description": "Techniques for transferring between orbits."
+      },
+      {
+        "id": "L306",
+        "name": "Mission Planning",
+        "description": "Planning missions for orbital maneuvers."
+      }
+    ]
+  },
+  {
+    "id": "M303",
+    "name": "Spacecraft Systems Engineering",
+    "description": "Overview of spacecraft systems and subsystems engineering.",
+    "course": "RS103",
+    "lessons": [
+      {
+        "id": "L307",
+        "name": "Power Subsystems",
+        "description": "Spacecraft electrical and power systems."
+      },
+      {
+        "id": "L308",
+        "name": "Communication Systems",
+        "description": "Radio and data subsystems for space."
+      },
+      {
+        "id": "L309",
+        "name": "Attitude Control",
+        "description": "Controlling orientation and stability."
+      }
+    ]
+  },
+  {
+    "id": "M304",
+    "name": "Thermal Control",
+    "description": "Principles and technologies for spacecraft temperature management.",
+    "course": "RS103",
+    "lessons": [
+      {
+        "id": "L310",
+        "name": "Passive Thermal Control",
+        "description": "Methods of passive temperature regulation."
+      },
+      {
+        "id": "L311",
+        "name": "Active Thermal Control",
+        "description": "Active systems for heat dissipation."
+      },
+      {
+        "id": "L312",
+        "name": "Thermal Modelling",
+        "description": "Models and simulation for thermal management."
+      }
+    ]
+  },
+  {
+    "id": "M401",
+    "name": "Hydrocarbons",
+    "description": "Structure, properties, and reactions of hydrocarbons.",
+    "course": "RS104",
+    "lessons": [
+      {
+        "id": "L401",
+        "name": "Alkanes and Alkenes",
+        "description": "Properties and reactions of alkanes and alkenes."
+      },
+      {
+        "id": "L402",
+        "name": "Aromatic Compounds",
+        "description": "Structures and reactions of aromatic molecules."
+      },
+      {
+        "id": "L403",
+        "name": "Hydrocarbon Reactions",
+        "description": "Common reactions involving hydrocarbons."
+      }
+    ]
+  },
+  {
+    "id": "M402",
+    "name": "Functional Groups",
+    "description": "Study of alcohols, aldehydes, ketones, and more.",
+    "course": "RS104",
+    "lessons": [
+      {
+        "id": "L404",
+        "name": "Alcohols and Ethers",
+        "description": "Structures and properties of alcohols and ethers."
+      },
+      {
+        "id": "L405",
+        "name": "Aldehydes and Ketones",
+        "description": "Chemical properties and identification."
+      },
+      {
+        "id": "L406",
+        "name": "Carboxylic Acids",
+        "description": "Structure and reactivity of carboxylic acids."
+      }
+    ]
+  },
+  {
+    "id": "M403",
+    "name": "Stereochemistry",
+    "description": "Examining chiral molecules and stereoisomerism.",
+    "course": "RS104",
+    "lessons": [
+      {
+        "id": "L407",
+        "name": "Chiral Centers",
+        "description": "Identification of chiral centers in molecules."
+      },
+      {
+        "id": "L408",
+        "name": "Enantiomers and Diastereomers",
+        "description": "Types and properties of stereoisomers."
+      },
+      {
+        "id": "L409",
+        "name": "Optical Activity",
+        "description": "Measurement and significance of optical activity."
+      }
+    ]
+  },
+  {
+    "id": "M404",
+    "name": "Organic Synthesis",
+    "description": "Laboratory techniques and synthetic methods.",
+    "course": "RS104",
+    "lessons": [
+      {
+        "id": "L410",
+        "name": "Synthetic Routes",
+        "description": "Designing synthetic pathways."
+      },
+      {
+        "id": "L411",
+        "name": "Reaction Mechanisms",
+        "description": "Understanding organic reaction mechanisms."
+      },
+      {
+        "id": "L412",
+        "name": "Lab Safety in Synthesis",
+        "description": "Safety measures and best practices in organic synthesis."
+      }
+    ]
+  },
+  {
+    "id": "M501",
+    "name": "Coordination Chemistry",
+    "description": "Introduction to coordination complexes and ligands.",
+    "course": "RS105",
+    "lessons": [
+      {
+        "id": "L501",
+        "name": "Ligand Types",
+        "description": "Classification and properties of ligands."
+      },
+      {
+        "id": "L502",
+        "name": "Complex Formation",
+        "description": "Mechanisms of complex formation."
+      },
+      {
+        "id": "L503",
+        "name": "Applications",
+        "description": "Practical applications of coordination chemistry."
+      }
+    ]
+  },
+  {
+    "id": "M502",
+    "name": "Crystal Field Theory",
+    "description": "Study of symmetry and crystal fields.",
+    "course": "RS105",
+    "lessons": [
+      {
+        "id": "L504",
+        "name": "Symmetry Elements",
+        "description": "Basic symmetry in crystal fields."
+      },
+      {
+        "id": "L505",
+        "name": "Crystal Field Splitting",
+        "description": "Energy splitting in crystal field theory."
+      },
+      {
+        "id": "L506",
+        "name": "Spectroscopic Studies",
+        "description": "Use of spectroscopy in crystal field analysis."
+      }
+    ]
+  },
+  {
+    "id": "M503",
+    "name": "Bioinorganic Chemistry",
+    "description": "Role of metals in biological systems.",
+    "course": "RS105",
+    "lessons": [
+      {
+        "id": "L507",
+        "name": "Metalloenzymes",
+        "description": "Function and structure of metalloenzymes."
+      },
+      {
+        "id": "L508",
+        "name": "Metal Transport",
+        "description": "Transport of metals in the body."
+      },
+      {
+        "id": "L509",
+        "name": "Bioinorganic Applications",
+        "description": "Applications of inorganic chemistry in biology."
+      }
+    ]
+  },
+  {
+    "id": "M504",
+    "name": "Inorganic Synthesis Lab",
+    "description": "Synthesis and analysis of inorganic compounds.",
+    "course": "RS105",
+    "lessons": [
+      {
+        "id": "L510",
+        "name": "Preparation Techniques",
+        "description": "Methods of preparing inorganic compounds."
+      },
+      {
+        "id": "L511",
+        "name": "Qualitative Analysis",
+        "description": "Testing and analyzing inorganic synthesis."
+      },
+      {
+        "id": "L512",
+        "name": "Lab Safety",
+        "description": "Safety procedures for inorganic synthesis."
+      }
+    ]
+  },
+  {
+    "id": "M701",
+    "name": "Introduction to Elvish",
+    "description": "Study of Sindarin and Quenya grammar.",
+    "course": "RS107",
+    "lessons": [
+      {
+        "id": "L701",
+        "name": "Sindarin Basics",
+        "description": "Grammar and vocabulary for beginners."
+      },
+      {
+        "id": "L702",
+        "name": "Quenya Structure",
+        "description": "Introduction to Quenya word structure."
+      },
+      {
+        "id": "L703",
+        "name": "Elvish Pronunciation",
+        "description": "Pronunciation rules and tips."
+      }
+    ]
+  },
+  {
+    "id": "M702",
+    "name": "Dwarvish and Adunaic",
+    "description": "Overview of Khuzdul and Adunaic scripts.",
+    "course": "RS107",
+    "lessons": [
+      {
+        "id": "L704",
+        "name": "Khuzdul Alphabet",
+        "description": "Study of Khuzdul alphabet and script."
+      },
+      {
+        "id": "L705",
+        "name": "Adunaic Sentence Structure",
+        "description": "Building sentences in Adunaic."
+      },
+      {
+        "id": "L706",
+        "name": "Writing in Dwarvish",
+        "description": "Handwriting, calligraphy and text creation."
+      }
+    ]
+  },
+  {
+    "id": "M703",
+    "name": "Black Speech",
+    "description": "Structure and meaning of Mordor's language.",
+    "course": "RS107",
+    "lessons": [
+      {
+        "id": "L707",
+        "name": "Black Speech Creation",
+        "description": "History and construction of Black Speech."
+      },
+      {
+        "id": "L708",
+        "name": "Grammar of Black Speech",
+        "description": "Structure and grammar rules."
+      },
+      {
+        "id": "L709",
+        "name": "Cultural Impact",
+        "description": "Role in Middle-earth culture and lore."
+      }
+    ]
+  },
+  {
+    "id": "M704",
+    "name": "Philology and Inscription",
+    "description": "Historical texts and writings in Middle-earth.",
+    "course": "RS107",
+    "lessons": [
+      {
+        "id": "L710",
+        "name": "Philological Methods",
+        "description": "Methods in philological research."
+      },
+      {
+        "id": "L711",
+        "name": "Famous Inscriptions",
+        "description": "Famous texts and inscriptions from Middle-earth."
+      },
+      {
+        "id": "L712",
+        "name": "Translation Practice",
+        "description": "Practice in translating Middle-earth texts."
+      }
+    ]
+  },
+  {
+    "id": "M601",
+    "name": "Thermodynamics",
+    "description": "The laws of thermodynamics, state functions, and equilibria.",
+    "course": "RS106",
+    "lessons": [
+      { "id": "L601", "name": "First Law of Thermodynamics", "description": "Internal energy, work, and heat." },
+      { "id": "L602", "name": "Second and Third Law", "description": "Entropy, spontaneity, and absolute zero." },
+      { "id": "L603", "name": "Thermochemical Calculations", "description": "Enthalpy, Hess's Law, and calorimetry." }
+    ]
+  },
+  {
+    "id": "M602",
+    "name": "Quantum Chemistry",
+    "description": "Introduction to quantum mechanics and molecular structure.",
+    "course": "RS106",
+    "lessons": [
+      { "id": "L604", "name": "Wave-Particle Duality", "description": "Basic principles and experiments of quantum theory." },
+      { "id": "L605", "name": "Schrödinger Equation", "description": "Solution and applications for atoms and molecules." },
+      { "id": "L606", "name": "Quantum Numbers", "description": "Quantum numbers and atomic orbitals." }
+    ]
+  },
+  {
+    "id": "M603",
+    "name": "Chemical Kinetics",
+    "description": "Reaction rates, mechanisms, and catalysis.",
+    "course": "RS106",
+    "lessons": [
+      { "id": "L607", "name": "Rate Laws", "description": "Differential and integrated rate laws." },
+      { "id": "L608", "name": "Reaction Mechanisms", "description": "Elementary steps and the molecularity of reactions." },
+      { "id": "L609", "name": "Catalysis and Enzymes", "description": "Catalytic cycles and biological catalysis." }
+    ]
+  },
+  {
+    "id": "M604",
+    "name": "Spectroscopy",
+    "description": "Principles and applications of molecular spectroscopy.",
+    "course": "RS106",
+    "lessons": [
+      { "id": "L610", "name": "Infrared Spectroscopy", "description": "Vibrational transitions and IR spectra." },
+      { "id": "L611", "name": "UV-Vis Spectroscopy", "description": "Electronic transitions and absorption spectra." },
+      { "id": "L612", "name": "NMR Spectroscopy", "description": "Nuclear magnetic resonance and applications." }
+    ]
+  },
+  {
+    "id": "M801",
+    "name": "Introduction to Middle-earth Diplomacy",
+    "description": "Overview of diplomatic relations among the races in Middle-earth.",
+    "course": "RS108",
+    "lessons": [
+      { "id": "L801", "name": "Council of Elrond", "description": "Analysis of the historic council's significance and alliances." },
+      { "id": "L802", "name": "Traditions of the Eldar and Edain", "description": "Cultural context for Elvish and Human alliances." },
+      { "id": "L803", "name": "Wisdom of the Istari", "description": "Role and influence of the wizards in diplomacy." }
+    ]
+  },
+  {
+    "id": "M802",
+    "name": "Human-Elven Relations",
+    "description": "Case studies of interaction between Elves and Men.",
+    "course": "RS108",
+    "lessons": [
+      { "id": "L804", "name": "Alliance in the First Age", "description": "Earliest alliances and their outcomes." },
+      { "id": "L805", "name": "Conflicts and Misunderstandings", "description": "Major disputes and resolutions." },
+      { "id": "L806", "name": "Marriage and Kinship Bonds", "description": "How marriage impacted diplomacy." }
+    ]
+  },
+  {
+    "id": "M803",
+    "name": "Dwarves, Wizards, and the Third Age",
+    "description": "Diplomatic and political developments in the Third Age.",
+    "course": "RS108",
+    "lessons": [
+      { "id": "L807", "name": "Formation of the Fellowship", "description": "Alliance of different races against a common threat." },
+      { "id": "L808", "name": "Treaties and Oaths", "description": "Pacts and agreements that shaped history." },
+      { "id": "L809", "name": "Diplomacy After the War of the Ring", "description": "Post-war peace and inter-species relations." }
+    ]
+  },
+  {
+    "id": "M804",
+    "name": "Leadership and Mediation",
+    "description": "Traits and techniques of Middle-earth leaders in conflict resolution.",
+    "course": "RS108",
+    "lessons": [
+      { "id": "L810", "name": "Role of the Kings and Lords", "description": "Politics and influence of leaders." },
+      { "id": "L811", "name": "Wisdom in Council", "description": "Analysis of key council meetings in history." },
+      { "id": "L812", "name": "Lessons for Modern Diplomacy", "description": "What contemporary societies can learn from Middle-earth." }
+    ]
+  }
+]
