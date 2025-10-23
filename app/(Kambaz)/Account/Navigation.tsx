@@ -1,9 +1,22 @@
+"use client"
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 export default function AccountNavigation() {
+  const pathname = usePathname();
+  const links = ["Signin","Signup","Profile"];
  return (
-   <div id="wd-account-navigation" className="wd list-group fs-6 rounded-0">
-     <Link href="Signin" className="list-group-item active border-0">Signin</Link>
-     <Link href="Signup" className="list-group-item text-danger border-0">Signup</Link>
-     <Link href="Profile" className="list-group-item text-danger border-0"> Profile </Link>
+   <div id="wd-account-navigation" className="wd list-group rounded-0 fs-6">
+      {links.map((link) => (
+                <Link
+                    key={link}
+                    href={link}
+                    id={`wd-course-${link.toLowerCase()}-link`}
+                    className={`list-group-item border-0
+                        ${pathname.includes(`/${link}`) ? "active" : "text-danger"}`}
+                >
+                    {link}
+                </Link>
+            ))}
    </div>
 );}
