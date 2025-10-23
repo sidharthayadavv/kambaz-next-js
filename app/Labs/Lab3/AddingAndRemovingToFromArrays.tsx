@@ -1,12 +1,10 @@
 export default function AddingAndRemovingToFromArrays() {
   const numberArray1 = [1, 2, 3, 4, 5];
   const stringArray1 = ["string1", "string2"];
-  const listOfTodo=["Buy milk", "Feed the pets"];
-  const todoArray = listOfTodo.map((item, idx) => <li key={idx}>{item}</li>);
+  const todoArray = [<li key={1}>Buy milk</li>, <li key={2}>Feed the pets</li>];
   numberArray1.push(6); // adding new items
   stringArray1.push("string3");
-  const temp1=["Walk the dogs"];
-  todoArray.push(temp1.map((item, idx) => <li key={idx}>{item}</li>));
+  todoArray.push(<li>Walk the dogs</li>);
   numberArray1.splice(2, 1); // remove 1 item starting at 2
   stringArray1.splice(1, 1);
   return (
