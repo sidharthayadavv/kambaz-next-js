@@ -1,3 +1,4 @@
+import ModuleEditor from "./ModuleEditor";
 import {
   Button,
   Dropdown,
@@ -8,7 +9,13 @@ import {
 import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import { MdOutlineUnpublished } from "react-icons/md";
-export default function ModulesControls() {
+import { useState } from "react";
+export default function ModulesControls(
+{ moduleName, setModuleName, addModule }:
+{ moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }) {
+ const [show, setShow] = useState(false);
+ const handleClose = () => setShow(false);
+ const handleShow = () => setShow(true);
   return (
     <div id="wd-modules-controls" className="d-flex text-nowrap">
       {/* Implement the View Progress and Collapse All buttons with IDs wd-view-progress and wd-collapse-all */}
@@ -55,9 +62,11 @@ export default function ModulesControls() {
         className="me-1 float-end"
         id="wd-add-module-btn"
       >
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} onClick={handleShow}/>
         Module
       </Button>
+      <ModuleEditor show={show} handleClose={handleClose} dialogTitle="Add Module"
+       moduleName={moduleName} setModuleName={setModuleName} addModule={addModule} />
     </div>
   );
 }

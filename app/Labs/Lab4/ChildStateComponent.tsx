@@ -1,0 +1,17 @@
+import "./style.css"
+export default function ChildStateComponent({
+ counter,
+ setCounter
+} : {
+ counter: number;
+ setCounter: (counter: number) => void;
+}) {
+  return (
+    <div id="wd-child-state">
+      <h3>Counter {counter}</h3>
+      <button onClick={() => setCounter(counter + 1)} id="wd-increment-child-state-click" className="border-0 bg-success">
+        Increment</button>
+      <button onClick={() => setCounter(counter - 1)} id="wd-decrement-child-state-click" className="border-0 bg-danger">
+        Decrement</button>
+    </div>
+);}

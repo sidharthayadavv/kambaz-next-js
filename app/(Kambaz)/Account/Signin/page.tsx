@@ -1,30 +1,64 @@
+"use client";
 import Link from "next/link";
-import "./style.css";
-import { Button, FormControl } from "react-bootstrap";
+import { useRouter } from "next/navigation";
+import { setCurrentUser } from "../reducer";
+import { loadEnrollmentsFromStorage } from "../../Enrollments/reducer";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import * as db from "../../Database";
+import { FormControl, Button } from "react-bootstrap";
 
 export default function Signin() {
-  return (
-    <div id="wd-signin-screen">
-      <h1>Signin</h1>
-      <FormControl 
-        id="wd-username"
-        placeholder="username"
-        className="mb-2"
-      />
-      <FormControl 
-        id="wd-password"
-        placeholder="password" 
-        type="password"
-        className="mb-2"
-      />
-      <Link id="wd-signin-btn" href="/Account/Profile">
-        <Button className="btn btn-primary w-100 mb-2">
-          Sign in
-        </Button>
-      </Link>
-      <Link id="wd-signup-link" href="/Account/Signup">
-        Sign up
-      </Link>
-    </div>
-  );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [credentials, setCredentials] = useState<any>({});
+    const dispatch = useDispatch();
+    const router = useRouter();  // Use useRouter instead of redirect
+
+    const signin = () => {
+        const user = db.users.find(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (u: any) =>
+                u.username === credentials.username &&
+                u.password === credentials.password
+        );
+        if (!user) {
+            alert("Invalid credentials");  // Optional: add error handling
+            return;
+        }
+        dispatch(setCurrentUser(user));
+        // Load enrollments from localStorage when user signs in
+        dispatch(loadEnrollmentsFromStorage());
+        router.push("/Dashboard");  // Use router.push instead of redirect
+    };
+
+    return (
+        <div className="d-flex min-vh-100">
+            <div id="wd-signin-screen" style={{ width: "300px" }}>
+                <h1>Sign in</h1>
+                <FormControl
+                    value={credentials.username || ""}
+                    onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+                    className="mb-2"
+                    placeholder="username"
+                    id="wd-username"
+                />
+                <FormControl
+                    value={credentials.password || ""}
+                    onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                    className="mb-2"
+                    placeholder="password"
+                    type="password"
+                    id="wd-password"
+                />
+                <Button
+                    onClick={signin}
+                    id="wd-signin-btn"
+                    className="w-100 mb-2"
+                >
+                    Sign in
+                </Button>
+                <Link id="wd-signup-link" href="/Account/Signup">Sign up</Link>
+            </div>
+        </div>
+    );
 }

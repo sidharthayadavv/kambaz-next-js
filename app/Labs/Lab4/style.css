@@ -1,0 +1,46 @@
+#wd-counter-down-click{
+  background-color: red;
+  color: white;
+  border-radius: 5%;
+  width: 100px;
+  height: 50px;
+}
+#wd-counter-up-click{
+  background-color: green;
+  color: white;
+  border-radius: 5%;
+  width: 100px;
+  height: 50px;
+  margin-right: 2px;
+}
+#add-element{
+  background-color: green;
+  color: white;
+  border-radius: 5%;
+  width: 150px;
+  height: 50px;
+  margin: 1%
+}
+#delete-button{
+  background-color: red;
+  color: white;
+  border-radius: 5%;
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+}
+#wd-increment-child-state-click{
+  background-color: green;
+  color: white;
+  border-radius: 5%;
+  width: 100px;
+  height: 50px;
+  margin-right: 2px;
+}
+#wd-decrement-child-state-click{
+  background-color: red;
+  color: white;
+  border-radius: 5%;
+  width: 100px;
+  height: 50px;
+}
