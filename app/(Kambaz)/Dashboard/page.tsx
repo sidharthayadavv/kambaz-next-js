@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
@@ -15,28 +16,24 @@ export default function Dashboard() {
     const { enrollments } = useSelector((state: RootState) => state.enrollmentsReducer);
     const router = useRouter();
     const [showAllCourses, setShowAllCourses] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [course, setCourse] = useState<any>({
         _id: "0", name: "New Course", number: "New Number",
         startDate: "2023-09-10", endDate: "2023-12-15",
         image: "/images/reactjs.jpg", description: "New Description"
     });
 
-    // Redirect to sign-in if not logged in
     useEffect(() => {
         if (!currentUser) {
             router.push("/Account/Signin");
         }
     }, [currentUser, router]);
 
-    // Don't render anything if not logged in (will redirect)
     if (!currentUser) {
         return null;
     }
     const isEnrolled = (courseId: string) => {
         if (!currentUser) return false;
         return enrollments.some(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (e: any) => e.user === currentUser._id && e.course === courseId
         );
     };
@@ -59,17 +56,14 @@ export default function Dashboard() {
 
     const handleCourseClick = (courseId: string, event: React.MouseEvent) => {
         if (!currentUser) return;
-        // Faculty can always access courses
         if (currentUser.role === "FACULTY") {
             router.push(`/Courses/${courseId}/Home`);
             return;
         }
-        // Students can only access if enrolled
         if (isEnrolled(courseId)) {
             router.push(`/Courses/${courseId}/Home`);
         } else {
             event.preventDefault();
-            // Stay on Dashboard if not enrolled
         }
     };
 
@@ -92,7 +86,6 @@ export default function Dashboard() {
                             id="wd-add-new-course-click"
                             onClick={() => {
                                 dispatch(addNewCourse(course));
-                                // Reset form after adding
                                 setCourse({
                                     _id: "0", name: "New Course", number: "New Number",
                                     startDate: "2023-09-10", endDate: "2023-12-15",
@@ -119,18 +112,13 @@ export default function Dashboard() {
             <div id="wd-dashboard-courses">
                 <Row xs={1} md={5} className="g-4">
                     {courses
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         .filter((course: any) => {
                             if (!currentUser) return false;
-                            // Faculty can see all courses
                             if (currentUser.role === "FACULTY") return true;
-                            // If showAllCourses is true, show all courses; otherwise show only enrolled
                             if (showAllCourses) return true;
-                            // Students can only see courses they're enrolled in
                             return isEnrolled(course._id);
                         })
 
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         .map((course: any, key: number) => {
                             const enrolled = isEnrolled(course._id);
                             return (
@@ -139,7 +127,7 @@ export default function Dashboard() {
                                         <div onClick={(e) => handleCourseClick(course._id, e)}>
                                             <Link href={`/Courses/${course._id}/Home`}
                                                 className="wd-dashboard-course-link text-decoration-none text-dark" >
-                                                <CardImg src="/images/reactjs.jpg" variant="top" width="100%" height={160} />
+                                                <CardImg src={course.image} variant="top" width="100%" height={160} />
                                                 <CardBody className="card-body">
                                                     <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">
                                                         {course.name} </CardTitle>
