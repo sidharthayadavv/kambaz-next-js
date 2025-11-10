@@ -17,7 +17,7 @@ export default function Modules() {
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: RootState) => state.modulesReducer);
   const dispatch = useDispatch();
-  const courseModules = modules.filter((module) => module.course === cid);
+  const courseModules = modules.filter((module: any) => module.course === cid);
   return (
     <div>
       <ModulesControls
@@ -32,7 +32,7 @@ export default function Modules() {
       <br />
       <br />
       <ListGroup id="wd-modules" className="rounded-0">
-        {courseModules.map((module) => (
+        {courseModules.map((module: any) => (
           <ListGroupItem
             key={module._id}
             className="wd-module p-0 mb-5 fs-5 border-gray"
