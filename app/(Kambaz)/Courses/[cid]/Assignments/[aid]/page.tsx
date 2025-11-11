@@ -37,10 +37,8 @@ export default function AssignmentEditor() {
     useEffect(() => {
         if (!isNewAssignment) {
             if (existingAssignment) {
-                // Update state when existing assignment is found
                 setAssignment(existingAssignment);
             } else {
-                // Assignment not found, redirect back
                 router.push(`/Courses/${cid}/Assignments`);
             }
         }
@@ -114,8 +112,8 @@ export default function AssignmentEditor() {
                                     <Form.Control
                                         type="date"
                                         id="wd-due-date"
-                                        value={assignment.dueDate}
-                                        onChange={(e) => setAssignment({ ...assignment, dueDate: e.target.value })}
+                                        value={assignment.due}
+                                        onChange={(e) => setAssignment({ ...assignment, due: e.target.value })}
                                         disabled={!isFaculty}
                                     />
                                     <button className="btn btn-outline-secondary" type="button">
@@ -134,8 +132,8 @@ export default function AssignmentEditor() {
                                             <Form.Control
                                                 type="date"
                                                 id="wd-available-from"
-                                                value={assignment.availableDate}
-                                                onChange={(e) => setAssignment({ ...assignment, availableDate: e.target.value })}
+                                                value={assignment.avail}
+                                                onChange={(e) => setAssignment({ ...assignment, avail: e.target.value })}
                                                 disabled={!isFaculty}
                                             />
                                             <button className="btn btn-outline-secondary" type="button">
@@ -151,8 +149,8 @@ export default function AssignmentEditor() {
                                             <Form.Control
                                                 type="date"
                                                 id="wd-available-until"
-                                                value={assignment.untilDate}
-                                                onChange={(e) => setAssignment({ ...assignment, untilDate: e.target.value })}
+                                                value={assignment.due}
+                                                onChange={(e) => setAssignment({ ...assignment, due: e.target.value })}
                                                 disabled={!isFaculty}
                                             />
                                             <button className="btn btn-outline-secondary" type="button">

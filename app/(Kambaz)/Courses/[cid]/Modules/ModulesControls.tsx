@@ -60,9 +60,9 @@ export default function ModulesControls(
         variant="danger"
         size="lg"
         className="me-1 float-end"
-        id="wd-add-module-btn"
+        id="wd-add-module-btn" onClick={handleShow}
       >
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} onClick={handleShow}/>
+        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module
       </Button>
       <ModuleEditor show={show} handleClose={handleClose} dialogTitle="Add Module"

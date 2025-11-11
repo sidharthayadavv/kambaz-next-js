@@ -119,10 +119,10 @@ export default function Assignments() {
                                             </Link>
                                             <div className="small">
                                                 <span className="text-danger">Multiple Modules</span>
-                                                <span className="text-muted"> | Not available until {assignment.availableDate} | </span>
+                                                <span className="text-muted"> | Not available until {assignment.avail} | </span>
                                             </div>
                                             <div className="small text-muted">
-                                                <strong>Due</strong> {assignment.dueDate} | {assignment.points} pts
+                                                <strong>Due</strong> {assignment.due} | {assignment.points} pts
                                             </div>
                                         </div>
                                         <div className="d-flex align-items-center">
