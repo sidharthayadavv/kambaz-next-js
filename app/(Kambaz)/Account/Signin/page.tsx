@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import * as client from "../client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { setCurrentUser } from "../reducer";
@@ -9,31 +11,24 @@ import * as db from "../../Database";
 import { FormControl, Button } from "react-bootstrap";
 
 export default function Signin() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [credentials, setCredentials] = useState<any>({});
     const dispatch = useDispatch();
-    const router = useRouter();  // Use useRouter instead of redirect
+    const router = useRouter();
 
-    const signin = () => {
-        const user = db.users.find(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (u: any) =>
-                u.username === credentials.username &&
-                u.password === credentials.password
-        );
+    const signin = async () => {
+        const user =  await client.signin(credentials);
         if (!user) {
-            alert("Invalid credentials");  // Optional: add error handling
+            alert("Invalid credentials");
             return;
         }
         dispatch(setCurrentUser(user));
-        // Load enrollments from localStorage when user signs in
         dispatch(loadEnrollmentsFromStorage());
-        router.push("/Dashboard");  // Use router.push instead of redirect
+        router.push("/Dashboard");
     };
 
     return (
-        <div className="d-flex min-vh-100">
-            <div id="wd-signin-screen" style={{ width: "300px" }}>
+        <div className="d-flex min-vh-100 justify-content-center align-items-topcenter">
+            <div id="wd-signin-screen" style={{ width: "500px" }}>
                 <h1>Sign in</h1>
                 <FormControl
                     value={credentials.username || ""}

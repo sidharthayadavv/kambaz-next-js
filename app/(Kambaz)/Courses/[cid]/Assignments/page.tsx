@@ -8,9 +8,10 @@ import { FaEdit } from 'react-icons/fa';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
 import { RootState } from "../../../store";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as client from "./client";
 
 export default function Assignments() {
     const { cid } = useParams();
@@ -20,9 +21,27 @@ export default function Assignments() {
     const { currentUser } = useSelector((state: RootState) => state.accountReducer);
     const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
-    const handleDelete = (assignmentId: string) => {
-        dispatch(deleteAssignment(assignmentId));
-        setDeleteConfirm(null);
+    const fetchAssignments = async () => {
+        try {
+            const assignments = await client.findAssignmentsForCourse(cid as string);
+            dispatch(setAssignments(assignments));
+        } catch (error) {
+            console.error("Error fetching assignments:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAssignments();
+    }, [cid]);
+
+    const handleDelete = async (assignmentId: string) => {
+        try {
+            await client.deleteAssignment(assignmentId);
+            dispatch(deleteAssignment(assignmentId));
+            setDeleteConfirm(null);
+        } catch (error) {
+            console.error("Error deleting assignment:", error);
+        }
     };
 
     const isFaculty = currentUser?.role === "FACULTY";
@@ -77,7 +96,6 @@ export default function Assignments() {
 
                     <ListGroup className="rounded-0">
                         {assignments
-                            .filter((assignment: any) => assignment.course === cid)
                             .map((assignment: any) => (
                                 <ListGroupItem
                                     key={assignment._id}
