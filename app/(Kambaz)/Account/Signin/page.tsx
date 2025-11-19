@@ -7,7 +7,7 @@ import { setCurrentUser } from "../reducer";
 import { loadEnrollmentsFromStorage } from "../../Enrollments/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import * as db from "../../Database";
+// import * as db from "../../Database";
 import { FormControl, Button } from "react-bootstrap";
 
 export default function Signin() {
