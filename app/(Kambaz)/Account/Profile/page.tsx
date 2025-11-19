@@ -1,32 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import * as client from "../client";
-import { redirect } from "next/dist/client/components/navigation";
+// import { redirect } from "next/dist/client/components/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
 import { RootState } from "../../store";
 import { Button, FormControl } from "react-bootstrap";
+import { useRouter } from "next/navigation";
 export default function Profile() {
  const [profile, setProfile] = useState<any>({});
  const dispatch = useDispatch();
+ const router = useRouter();
  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
  const updateProfile = async () => {
-    const updatedProfile = await client.updateUser(profile);
-    dispatch(setCurrentUser(updatedProfile));
-  };
+        try {
+            const updatedProfile = await client.updateUser(profile);
+            dispatch(setCurrentUser(updatedProfile));
+            alert("Profile updated successfully!");
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            alert("Failed to update profile");
+        }
+    };
  const fetchProfile = () => {
-   if (!currentUser) return redirect("/Account/Signin");
+   if (!currentUser) return router.push("/Account/Signin");
    setProfile(currentUser);
  };
  const signout = async () => {
    await client.signout();
    dispatch(setCurrentUser(null));
-   redirect("/Account/Signin");
+   router.push("/Account/Signin");
  };
  useEffect(() => {
    fetchProfile();
- }, []);
+ }, [currentUser]);
  return (
    <div className="wd-profile-screen">
      <h3>Profile</h3>
