@@ -1,4 +1,5 @@
 "use client"
+// Kambaz Navigation Component
 import { AiOutlineDashboard, AiTwotoneExperiment } from "react-icons/ai";
 import {
   FaBookOpenReader,
@@ -7,7 +8,7 @@ import {
 } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { Image, ListGroup, ListGroupItem } from "react-bootstrap";
 import { FiInbox } from "react-icons/fi";
 export default function KambazNavigation() {
   const pathname = usePathname();
@@ -32,7 +33,7 @@ export default function KambazNavigation() {
           href="https://www.northeastern.edu/"
           id="wd-neu-link"
         >
-          <img
+          <Image
             src="/images/neuhuskylogo.jpg"
             width="75px"
             alt="Northeastern University"
