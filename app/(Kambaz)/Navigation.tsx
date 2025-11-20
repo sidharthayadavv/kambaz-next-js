@@ -1,5 +1,5 @@
 "use client"
-// Kambaz Navigation Component
+// Kambaz Navigation
 import { AiOutlineDashboard, AiTwotoneExperiment } from "react-icons/ai";
 import {
   FaBookOpenReader,
