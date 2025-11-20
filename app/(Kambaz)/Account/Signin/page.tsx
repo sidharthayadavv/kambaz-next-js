@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import * as client from "../client";
 import Link from "next/link";
@@ -7,28 +6,26 @@ import { setCurrentUser } from "../reducer";
 import { loadEnrollmentsFromStorage } from "../../Enrollments/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-// import * as db from "../../Database";
+import * as db from "../../Database";
 import { FormControl, Button } from "react-bootstrap";
 
 export default function Signin() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [credentials, setCredentials] = useState<any>({});
     const dispatch = useDispatch();
     const router = useRouter();
 
     const signin = async () => {
-        const user =  await client.signin(credentials);
-        if (!user) {
-            alert("Invalid credentials");
-            return;
-        }
+        const user = await client.signin(credentials);
+        if (!user) return;
         dispatch(setCurrentUser(user));
         dispatch(loadEnrollmentsFromStorage());
         router.push("/Dashboard");
     };
 
     return (
-        <div className="d-flex min-vh-100 justify-content-center align-items-topcenter">
-            <div id="wd-signin-screen" style={{ width: "500px" }}>
+        <div className="d-flex min-vh-100">
+            <div id="wd-signin-screen" style={{ width: "300px" }}>
                 <h1>Sign in</h1>
                 <FormControl
                     value={credentials.username || ""}

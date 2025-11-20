@@ -24,6 +24,7 @@ export default function Signup() {
             setError("Passwords do not match");
             return;
         }
+
         try {
             const { confirmPassword, ...signupData } = user;
             const currentUser = await client.signup(signupData);
@@ -61,6 +62,7 @@ export default function Signup() {
                     value={user.password}
                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                 />
+
                 <FormControl
                     id="wd-confirm-password"
                     placeholder="Confirm Password"
@@ -69,12 +71,14 @@ export default function Signup() {
                     value={user.confirmPassword}
                     onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
                 />
+
                 <button
                     id="wd-signup-btn"
                     onClick={signup}
                     className="btn btn-primary w-100 mb-2">
                     Sign up
                 </button>
+
                 <Link id="wd-signin-link" href="/Account/Signin">
                     Sign in
                 </Link>
