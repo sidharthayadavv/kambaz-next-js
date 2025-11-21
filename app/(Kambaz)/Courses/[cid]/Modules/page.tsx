@@ -14,11 +14,14 @@ import * as client from "../../client";
 
 export default function Modules() {
   const { cid } = useParams();
-  // Ensure courseId is always a string
   const courseId = Array.isArray(cid) ? cid[0] : cid;
   
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: RootState) => state.modulesReducer);
+  const currentUser = useSelector((state: RootState) => state.authReducer?.currentUser);
+  
+  const isFaculty = currentUser?.role === "FACULTY" || currentUser?.role === "faculty";
+  
   const dispatch = useDispatch();
   const courseModules = modules.filter((module: any) => module.course === courseId);
   
@@ -33,34 +36,61 @@ export default function Modules() {
   }, [courseId]);
   
   const onCreateModuleForCourse = async () => {
-    if (!courseId) return;
+    if (!courseId || !isFaculty) return;
+    
     const newModule = { name: moduleName, course: courseId };
     // eslint-disable-next-line @next/next/no-assign-module-variable
     const module = await client.createModuleForCourse(courseId, newModule);
     dispatch(setModules([...modules, module]));
+    setModuleName(""); 
   };
   
   const onRemoveModule = async (moduleId: string) => {
-    await client.deleteModule(moduleId);
-    dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
+    if (!isFaculty) {
+      alert("Only faculty members can delete modules");
+      return;
+    }
+    
+    if (window.confirm("Are you sure you want to delete this module?")) {
+      await client.deleteModule(moduleId);
+      dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
+    }
   };
   
   const onUpdateModule = async (module: any) => {
+    if (!isFaculty) {
+      alert("Only faculty members can update modules");
+      return;
+    }
+    
     await client.updateModule(module);
     const newModules = modules.map((m: any) => m._id === module._id ? module : m );
     dispatch(setModules(newModules));
   };
+  
+  const handleEditModule = (moduleId: string) => {
+    if (!isFaculty) {
+      alert("Only faculty members can edit modules");
+      return;
+    }
+    dispatch(editModule(moduleId));
+  };
 
   return (
     <div>
-      <ModulesControls
-        moduleName={moduleName}
-        setModuleName={setModuleName}
-        addModule={onCreateModuleForCourse}
-      />
-      <br />
-      <br />
-      <br />
+      {isFaculty && (
+        <>
+          <ModulesControls
+            moduleName={moduleName}
+            setModuleName={setModuleName}
+            addModule={onCreateModuleForCourse}
+          />
+          <br />
+          <br />
+          <br />
+        </>
+      )}
+      
       <ListGroup id="wd-modules" className="rounded-0">
         {courseModules.map((module: any) => (
           <ListGroupItem
@@ -70,7 +100,7 @@ export default function Modules() {
             <div className="wd-title p-3 ps-2 bg-secondary">
               <BsGripVertical className="me-2 fs-3" />{" "}
               {!module.editing && module.name}
-              {module.editing && (
+              {module.editing && isFaculty && (
                 <FormControl
                   className="w-50 d-inline-block"
                   onChange={(e) =>
@@ -84,11 +114,13 @@ export default function Modules() {
                   defaultValue={module.name}
                 />
               )}
-              <ModuleControlButtons
-                moduleId={module._id}
-                deleteModule={(moduleId) => onRemoveModule(moduleId)}
-                editModule={(moduleId) => dispatch(editModule(moduleId))}
-              />
+              {isFaculty && (
+                <ModuleControlButtons
+                  moduleId={module._id}
+                  deleteModule={(moduleId) => onRemoveModule(moduleId)}
+                  editModule={(moduleId) => handleEditModule(moduleId)}
+                />
+              )}
             </div>
             <ListGroup className="wd-lessons rounded-0">
               {module.lessons && module.lessons.length > 0 ? (
@@ -98,7 +130,7 @@ export default function Modules() {
                     className="wd-lesson p-3 ps-1"
                   >
                     <BsGripVertical className="me-2 fs-3" /> {lesson.name}{" "}
-                    <LessonControlButtons />
+                    {isFaculty && <LessonControlButtons />}
                   </ListGroupItem>
                 ))
               ) : (
