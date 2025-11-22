@@ -1,3 +1,4 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
@@ -13,24 +14,34 @@ import { RootState } from "../../../store";
 
 export default function Modules() {
   const { cid } = useParams();
-  // const [modules, setModules] = useState<any[]>(db.modules);
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: RootState) => state.modulesReducer);
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
   const dispatch = useDispatch();
   const courseModules = modules.filter((module: any) => module.course === cid);
+  
+  // Check if current user is faculty
+  const isFaculty = currentUser?.role === "FACULTY";
+
   return (
     <div>
-      <ModulesControls
-        moduleName={moduleName}
-        setModuleName={setModuleName}
-        addModule={() => {
-          dispatch(addModule({ name: moduleName, course: cid }));
-          setModuleName("");
-        }}
-      />
-      <br />
-      <br />
-      <br />
+      {/* Only show ModulesControls (Add Module functionality) to faculty */}
+      {isFaculty && (
+        <>
+          <ModulesControls
+            moduleName={moduleName}
+            setModuleName={setModuleName}
+            addModule={() => {
+              dispatch(addModule({ name: moduleName, course: cid }));
+              setModuleName("");
+            }}
+          />
+          <br />
+          <br />
+          <br />
+        </>
+      )}
+      
       <ListGroup id="wd-modules" className="rounded-0">
         {courseModules.map((module: any) => (
           <ListGroupItem
@@ -40,7 +51,8 @@ export default function Modules() {
             <div className="wd-title p-3 ps-2 bg-secondary">
               <BsGripVertical className="me-2 fs-3" />{" "}
               {!module.editing && module.name}
-              {module.editing && (
+              {/* Only allow editing for faculty */}
+              {module.editing && isFaculty && (
                 <FormControl
                   className="w-50 d-inline-block"
                   onChange={(e) =>
@@ -54,13 +66,16 @@ export default function Modules() {
                   defaultValue={module.name}
                 />
               )}
-              <ModuleControlButtons
-                moduleId={module._id}
-                deleteModule={(moduleId) => {
-                  dispatch(deleteModule(moduleId));
-                }}
-                editModule={(moduleId) => dispatch(editModule(moduleId))}
-              />
+              {/* Only show module control buttons to faculty */}
+              {isFaculty && (
+                <ModuleControlButtons
+                  moduleId={module._id}
+                  deleteModule={(moduleId) => {
+                    dispatch(deleteModule(moduleId));
+                  }}
+                  editModule={(moduleId) => dispatch(editModule(moduleId))}
+                />
+              )}
             </div>
             <ListGroup className="wd-lessons rounded-0">
               {module.lessons && module.lessons.length > 0 ? (
@@ -70,7 +85,8 @@ export default function Modules() {
                     className="wd-lesson p-3 ps-1"
                   >
                     <BsGripVertical className="me-2 fs-3" /> {lesson.name}{" "}
-                    <LessonControlButtons />
+                    {/* Only show lesson control buttons to faculty */}
+                    {isFaculty && <LessonControlButtons />}
                   </ListGroupItem>
                 ))
               ) : (
