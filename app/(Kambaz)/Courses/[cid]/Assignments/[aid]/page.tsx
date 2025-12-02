@@ -34,9 +34,9 @@ export default function AssignmentEditor() {
       title: "",
       description: "",
       points: 100,
-      dueDate: "2024-05-13",
-      availableDate: "2024-05-06",
-      untilDate: "2024-05-20",
+      due: "2024-05-13",
+      avail: "2024-05-06",
+      until: "2024-05-20",
       course: cid,
     };
   });

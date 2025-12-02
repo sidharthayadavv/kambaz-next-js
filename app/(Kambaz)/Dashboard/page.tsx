@@ -165,7 +165,7 @@ export default function Dashboard() {
                                     <Card>
                                         <div className="wd-dashboard-course-link">
                                             <CardImg
-                                                src={course.image}
+                                                src={`images/${course._id}.jpg`}
                                                 variant="top"
                                                 width="100%"
                                                 height={160}

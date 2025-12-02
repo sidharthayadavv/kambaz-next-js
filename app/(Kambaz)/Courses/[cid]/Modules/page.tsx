@@ -1,147 +1,177 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+/* eslint-disable */
+"use client"
+import { useParams, useRouter } from "next/navigation";
+import LessonControlButtons from './LessonControlButtons';
+import ModulesControls from './ModulesControls';
+import ModuleControlButtons from './ModuleControlButtons';
+import { FormControl, ListGroup, ListGroupItem, Button, Collapse } from 'react-bootstrap';
+import { BsGripVertical } from 'react-icons/bs';
+import { FaCheck, FaTimes, FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { FormControl, ListGroup, ListGroupItem } from "react-bootstrap";
-import ModulesControls from "./ModulesControls";
-import { BsGripVertical } from "react-icons/bs";
-import LessonControlButtons from "./LessonControlButtons";
-import ModuleControlButtons from "./ModuleControlButtons";
-import { setModules, addModule, editModule, updateModule, deleteModule } from "./reducer";
+import { addModule, editModule, updateModule, deleteModule, setModules } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store";
 import * as client from "../../client";
 
 export default function Modules() {
-  const { cid } = useParams();
-  const courseId = Array.isArray(cid) ? cid[0] : cid;
-  
-  const [moduleName, setModuleName] = useState("");
-  const { modules } = useSelector((state: RootState) => state.modulesReducer);
-  const currentUser = useSelector((state: RootState) => state.authReducer?.currentUser);
-  
-  const isFaculty = currentUser?.role === "FACULTY" || currentUser?.role === "faculty";
-  
-  const dispatch = useDispatch();
-  const courseModules = modules.filter((module: any) => module.course === courseId);
-  
-  const fetchModules = async () => {
-    if (!courseId) return;
-    const modules = await client.findModulesForCourse(courseId);
-    dispatch(setModules(modules));
-  };
-  
-  useEffect(() => {
-    fetchModules();
-  }, [courseId]);
-  
-  const onCreateModuleForCourse = async () => {
-    if (!courseId || !isFaculty) return;
-    
-    const newModule = { name: moduleName, course: courseId };
-    // eslint-disable-next-line @next/next/no-assign-module-variable
-    const module = await client.createModuleForCourse(courseId, newModule);
-    dispatch(setModules([...modules, module]));
-    setModuleName(""); 
-  };
-  
-  const onRemoveModule = async (moduleId: string) => {
-    if (!isFaculty) {
-      alert("Only faculty members can delete modules");
-      return;
-    }
-    
-    if (window.confirm("Are you sure you want to delete this module?")) {
-      await client.deleteModule(moduleId);
-      dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
-    }
-  };
-  
-  const onUpdateModule = async (module: any) => {
-    if (!isFaculty) {
-      alert("Only faculty members can update modules");
-      return;
-    }
-    
-    await client.updateModule(module);
-    const newModules = modules.map((m: any) => m._id === module._id ? module : m );
-    dispatch(setModules(newModules));
-  };
-  
-  const handleEditModule = (moduleId: string) => {
-    if (!isFaculty) {
-      alert("Only faculty members can edit modules");
-      return;
-    }
-    dispatch(editModule(moduleId));
-  };
+    const { cid } = useParams<{ cid: string }>();
+    const router = useRouter();
+    const [moduleName, setModuleName] = useState("");
+    const { modules } = useSelector((state: RootState) => state.modulesReducer);
+    const { currentUser } = useSelector((state: RootState) => state.accountReducer);
+    const dispatch = useDispatch();
 
-  return (
-    <div>
-      {isFaculty && (
-        <>
-          <ModulesControls
-            moduleName={moduleName}
-            setModuleName={setModuleName}
-            addModule={onCreateModuleForCourse}
-          />
-          <br />
-          <br />
-          <br />
-        </>
-      )}
-      
-      <ListGroup id="wd-modules" className="rounded-0">
-        {courseModules.map((module: any) => (
-          <ListGroupItem
-            key={module._id}
-            className="wd-module p-0 mb-5 fs-5 border-gray"
-          >
-            <div className="wd-title p-3 ps-2 bg-secondary">
-              <BsGripVertical className="me-2 fs-3" />{" "}
-              {!module.editing && module.name}
-              {module.editing && isFaculty && (
-                <FormControl
-                  className="w-50 d-inline-block"
-                  onChange={(e) =>
-                    dispatch(updateModule({ ...module, name: e.target.value }))
-                  }
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      onUpdateModule({ ...module, editing: false });
-                    }
-                  }}
-                  defaultValue={module.name}
-                />
-              )}
-              {isFaculty && (
-                <ModuleControlButtons
-                  moduleId={module._id}
-                  deleteModule={(moduleId) => onRemoveModule(moduleId)}
-                  editModule={(moduleId) => handleEditModule(moduleId)}
-                />
-              )}
-            </div>
-            <ListGroup className="wd-lessons rounded-0">
-              {module.lessons && module.lessons.length > 0 ? (
-                module.lessons.map((lesson: any) => (
-                  <ListGroupItem
-                    key={lesson._id}
-                    className="wd-lesson p-3 ps-1"
-                  >
-                    <BsGripVertical className="me-2 fs-3" /> {lesson.name}{" "}
-                    {isFaculty && <LessonControlButtons />}
-                  </ListGroupItem>
-                ))
-              ) : (
-                <ListGroupItem className="wd-lesson p-3 ps-1 text-muted">
-                  No lessons for this module.
-                </ListGroupItem>
-              )}
+    const onUpdateModule = async (module: any) => {
+        await client.updateModule(cid, module);
+        const newModules = modules.map((m: any) => m._id === module._id ? module : m);
+        dispatch(setModules(newModules));
+    };
+
+    const onRemoveModule = async (moduleId: string) => {
+        await client.deleteModule(cid, moduleId);
+        dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
+    };
+
+    const onCreateModuleForCourse = async () => {
+        if (!cid) return;
+        const newModule = { name: moduleName, course: cid };
+        const module = await client.createModuleForCourse(cid, newModule);
+        dispatch(setModules([...modules, module]));
+        setModuleName("");
+    };
+
+    const fetchModules = async () => {
+        try {
+            const modules = await client.findModulesForCourse(cid as string);
+            dispatch(setModules(modules));
+        } catch (error) {
+            console.error("Error fetching modules:", error);
+        }
+    };
+
+    useEffect(() => {
+
+        if (!currentUser) {
+            router.push("/Account/Signin");
+            return;
+        }
+
+        fetchModules();
+    }, [cid, currentUser]);
+
+    const isFaculty = currentUser?.role === "FACULTY";
+
+    const [expandedModules, setExpandedModules] = useState<Set<string>>(
+        new Set(modules.map((m: any) => m._id))
+    );
+
+    const toggleModule = (moduleId: string) => {
+        const newExpanded = new Set(expandedModules);
+        if (newExpanded.has(moduleId)) {
+            newExpanded.delete(moduleId);
+        } else {
+            newExpanded.add(moduleId);
+        }
+        setExpandedModules(newExpanded);
+    };
+
+    return (
+        <div>
+            <ModulesControls
+                setModuleName={setModuleName}
+                moduleName={moduleName}
+                addModule={onCreateModuleForCourse}
+                isFaculty={isFaculty}
+            />
+            <br /><br />
+            <ListGroup id="wd-modules" className="rounded-0">
+                {modules.length === 0 ? (
+                    <ListGroupItem className="text-center p-5">
+                        <p className="text-muted mb-0">
+                            {isFaculty ? "No modules yet. Create your first module above." : "No modules available yet."}
+                        </p>
+                    </ListGroupItem>
+                ) : (
+                    modules.map((module: any) => {
+                        const isExpanded = expandedModules.has(module._id);
+                        return (
+                            <ListGroupItem key={module._id} className="wd-module p-0 mb-5 fs-5 border-gray">
+                                <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center">
+                                    <BsGripVertical className="me-2 fs-3" />
+                                    {!module.editing && (
+                                        <>
+                                            <button
+                                                className="btn btn-link p-0 me-2 text-dark"
+                                                onClick={() => toggleModule(module._id)}
+                                                aria-expanded={isExpanded}
+                                            >
+                                                {isExpanded ? <FaCaretDown /> : <FaCaretRight />}
+                                            </button>
+                                            <span
+                                                className="flex-grow-1"
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={() => toggleModule(module._id)}
+                                            >
+                                                {module.name}
+                                            </span>
+                                            {isFaculty && (
+                                                <ModuleControlButtons
+                                                    moduleId={module._id}
+                                                    deleteModule={(moduleId) => onRemoveModule(moduleId)}
+                                                    editModule={(moduleId) => dispatch(editModule(moduleId))}
+                                                />
+                                            )}
+                                        </>
+                                    )}
+                                    {module.editing && isFaculty && (
+                                        <>
+                                            <FormControl
+                                                className="me-2"
+                                                style={{ maxWidth: "50%" }}
+                                                onChange={(e) =>
+                                                    dispatch(updateModule({ ...module, name: e.target.value }))
+                                                }
+                                                onKeyDown={(e) => {
+                                                    if (e.key === "Enter") {
+                                                        onUpdateModule({ ...module, editing: false });
+                                                    } else if (e.key === "Escape") {
+                                                        dispatch(updateModule({ ...module, editing: false }));
+                                                    }
+                                                }}
+                                                defaultValue={module.name}
+                                                autoFocus
+                                            />
+                                            <Button
+                                                variant="success"
+                                                size="sm"
+                                                className="me-2"
+                                                onClick={() => onUpdateModule({ ...module, editing: false })}
+                                            >
+                                                <FaCheck />
+                                            </Button>
+                                        </>
+                                    )}
+                                </div>
+                                <Collapse in={isExpanded}>
+                                    <div>
+                                        {module.lessons && (
+                                            <ListGroup className="wd-lessons rounded-0">
+                                                {module.lessons.map((lesson: any, index: number) => (
+                                                    <ListGroupItem key={index} className="wd-lesson p-3 ps-1">
+                                                        <BsGripVertical className="me-2 fs-3" />
+                                                        {lesson.name}
+                                                        <LessonControlButtons />
+                                                    </ListGroupItem>
+                                                ))}
+                                            </ListGroup>
+                                        )}
+                                    </div>
+                                </Collapse>
+                            </ListGroupItem>
+                        );
+                    })
+                )}
             </ListGroup>
-          </ListGroupItem>
-        ))}
-      </ListGroup>
-    </div>
-  );
+        </div>
+    );
 }
